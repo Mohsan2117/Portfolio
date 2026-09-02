@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaEnvelope, FaGithub, FaLinkedin, FaStackOverflow } from "react-icons/fa";
 import HeroTerminal from "@/components/HeroTerminal";
 import { site } from "@/data/site";
 
 const socialIcons = {
   GitHub: FaGithub,
   LinkedIn: FaLinkedin,
+  StackOverflow: FaStackOverflow,
   Email: FaEnvelope,
 } as const;
 

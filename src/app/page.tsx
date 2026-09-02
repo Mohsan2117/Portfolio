@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Experience from "@/components/Experience";
-import AIAgentic from "@/components/AIAgentic";
+// import Experience from "@/components/Experience";
+import UnityGames from "@/components/UnityGames";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Testimonials from "@/components/Testimonials";
@@ -14,8 +14,8 @@ export default function Home() {
       <div id="top" />
       <Navbar />
       <Hero />
-      <Experience />
-      <AIAgentic />
+      {/* <Experience /> */}
+      <UnityGames />
       <Projects />
       <Skills />
       <Testimonials />

@@ -21,20 +21,20 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mohsan Iqbal | Front-End Web Developer",
+  title: "Mohsan Iqbal | AI-Powered Full-Stack Web Developer",
   description:
-    "Front-End Web Developer with a background in Software Engineering, specializing in React, Next.js, TypeScript, and Tailwind CSS.",
+    "AI-Powered Full-Stack Web Developer focused on building modern, responsive, and scalable web applications with React, Next.js, TypeScript, Go, REST APIs, and database-backed architectures.",
   keywords: [
-    "iamohsin",
-    "Muhammad Mohsin",
-    "AI-Powered Software Engineer",
-    "MERN Stack",
+    "Mohsan Iqbal",
+    "MohsanCodes",
+    "AI-Powered Full-Stack Web Developer",
     "Full-Stack Developer",
     "React",
-    "Node.js",
+    "Next.js",
     "TypeScript",
-    "Agentic AI",
-    "Automation",
+    "Go",
+    "REST APIs",
+    "Tailwind CSS",
   ],
 };
 

@@ -52,8 +52,8 @@ export default function Testimonials() {
             </div>
             <div className="testimonials__meta-divider" />
             <div className="testimonials__meta-item">
-              <span className="testimonials__meta-number">4+</span>
-              <span className="testimonials__meta-label">Companies</span>
+              <span className="testimonials__meta-number">1</span>
+              <span className="testimonials__meta-label">Company</span>
             </div>
             <div className="testimonials__meta-divider" />
             <div className="testimonials__meta-item">

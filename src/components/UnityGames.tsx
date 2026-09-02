@@ -2,19 +2,58 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { agenticProjects } from "@/data/site";
+import { site, unityGames } from "@/data/site";
+
+interface GameItem {
+  id: string;
+  name: string;
+  tagline: string;
+  href: string;
+  image: string;
+  status?: string;
+}
 
 const autoSequences = [
-  { thought: "Analyzing health signatures for CareerLab AI...", activeStep: 0, completedSteps: [] as number[] },
-  { thought: "Recalibrating Resume Reviewer NLP core...", activeStep: 2, completedSteps: [0, 1] },
-  { thought: "Executing test suite for Math IQ Engine...", activeStep: 3, completedSteps: [0, 1, 2] },
+  { thought: "Optimizing 3D mesh & shader pipeline in Unity...", activeStep: 0, completedSteps: [] as number[] },
+  { thought: "Profiling C# physics engine and frame rates...", activeStep: 1, completedSteps: [0] },
+  { thought: "Compiling Google Play Android App Bundle (AAB)...", activeStep: 3, completedSteps: [0, 1, 2] },
+  { thought: "Live sync connected with Google Play Developer Console...", activeStep: 4, completedSteps: [0, 1, 2, 3] },
 ];
 
-export default function AIAgentic() {
-  const [agentThought, setAgentThought] = useState("Monitoring active ecosystems...");
+export default function UnityGames() {
+  const [games, setGames] = useState<GameItem[]>(unityGames as unknown as GameItem[]);
+  const [loading, setLoading] = useState(true);
+  const [agentThought, setAgentThought] = useState("Synchronizing with Google Play Developer Console...");
   const [activeStep, setActiveStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [autoPlay, setAutoPlay] = useState(true);
+
+  // Auto-fetch games dynamically from Google Play on mount
+  useEffect(() => {
+    let isMounted = true;
+
+    async function fetchGames() {
+      try {
+        const res = await fetch("/api/games");
+        if (res.ok) {
+          const data = await res.json();
+          if (isMounted && data.games && data.games.length > 0) {
+            setGames(data.games);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch Play Store games dynamically:", err);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    }
+
+    fetchGames();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     if (!autoPlay || typeof window === "undefined" || window.innerWidth <= 992) return;
@@ -43,49 +82,49 @@ export default function AIAgentic() {
   }, [autoPlay]);
 
   const planSteps = [
-    "1. Scanning Requirements",
-    "2. Engineering Logic",
-    "3. Neural Optimization",
-    "4. Testing Protocols",
-    "5. Production Release",
+    "1. 3D Game Architecture (C#)",
+    "2. Physics & Core Game Loop",
+    "3. Shader & Asset Optimization",
+    "4. Google Play AAB Build",
+    "5. Production Live Release",
   ];
 
   const onProjectClick = (name: string, status: string) => {
     setAutoPlay(false);
-    setAgentThought(`Establishing secure handoff for ${name} [${status.toUpperCase()}]...`);
+    setAgentThought(`Launching Play Store listing for ${name} [${status.toUpperCase()}]...`);
     setActiveStep(4);
     setCompletedSteps([0, 1, 2, 3]);
   };
 
   return (
     <section id="ai-deployment">
+      <div id="games-development" />
       <div className="container">
         <div className="project-wrapper">
           <h2 className="section-title">
-            AI Agentic Development <span className="section-badge pulse">TRENDING</span>
+            Unity Game Development <span className="section-badge pulse">PLAY STORE</span>
           </h2>
           <p className="section-description">
-            Welcome to the era of <strong>Autonomous Engineering</strong>. These production-grade
-            applications were architected and deployed using an <strong>AI-First</strong> approach,
-            leveraging <strong>Cursor</strong> and <strong>Google Antigravity</strong> to achieve
-            unprecedented speed-to-market with zero manual syntax—proving that the future of dev is
-            here.
+            Crafting immersive <strong>3D & 2D mobile games</strong> powered by the{" "}
+            <strong>Unity Engine</strong> and <strong>C#</strong>. From responsive physics, custom
+            mechanics, and optimized asset pipelines to publishing and maintaining live production
+            titles on the <strong>Google Play Console</strong>.
           </p>
           <div className="cursor-editor">
             <div className="cursor-editor__sidebar">
-              <div className="sidebar-icon active">
-                <i className="fa-regular fa-file" />
+              <div className="sidebar-icon active" title="Project Explorer">
+                <i className="fa-solid fa-gamepad" />
               </div>
-              <div className="sidebar-icon">
-                <i className="fa-solid fa-magnifying-glass" />
+              <div className="sidebar-icon" title="C# Scripts">
+                <i className="fa-solid fa-code" />
               </div>
-              <div className="sidebar-icon">
-                <i className="fa-solid fa-code-branch" />
+              <div className="sidebar-icon" title="Physics & Shaders">
+                <i className="fa-solid fa-cubes" />
               </div>
-              <div className="sidebar-icon">
-                <i className="fa-solid fa-layer-group" />
+              <div className="sidebar-icon" title="Google Play Console">
+                <i className="fa-brands fa-google-play" />
               </div>
-              <div className="sidebar-icon bottom">
+              <div className="sidebar-icon bottom" title="Build Settings">
                 <i className="fa-solid fa-gear" />
               </div>
             </div>
@@ -95,29 +134,45 @@ export default function AIAgentic() {
                   <div className="cursor-editor__dashboard">
                     <div className="dashboard-header">
                       <div className="dashboard-title">
-                        <i className="fa-solid fa-layer-group" /> <span>Managed AI Stacks</span>
+                        <i className="fa-brands fa-unity" /> <span>Unity Studio Console</span>
                       </div>
                       <div className="dashboard-stats">
                         <span className="stat">
-                          <i className="fa-solid fa-circle-check" /> 6 Ready
+                          <i className="fa-solid fa-circle-check" /> {games.length} Published Game{games.length === 1 ? "" : "s"}
                         </span>
                         <span className="stat">
-                          <i className="fa-solid fa-microchip" /> Monitoring Active
+                          <i className="fa-solid fa-cloud-arrow-up" /> {loading ? "Syncing..." : "Auto-Sync Active"}
                         </span>
+                        <a
+                          href={site.playStoreDevUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="stat stat--link"
+                          style={{
+                            color: "#38ef7d",
+                            textDecoration: "none",
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: "6px",
+                            fontWeight: 600,
+                          }}
+                        >
+                          <i className="fa-brands fa-google-play" /> View Dev Console
+                        </a>
                       </div>
                     </div>
                     <div className="cursor-projects-grid">
-                      {agenticProjects.map((project) => (
+                      {games.map((project) => (
                         <a
-                          key={project.name}
+                          key={project.id || project.name}
                           href={project.href}
                           target="_blank"
                           rel="noreferrer"
                           className="cursor-project-card"
-                          onClick={() => onProjectClick(project.name, "live")}
+                          onClick={() => onProjectClick(project.name, project.status || "live")}
                         >
                           <div className="card-status live">
-                            <span className="dot pulse" /> LIVE
+                            <span className="dot pulse" /> {project.status || "LIVE"}
                           </div>
                           <Image
                             src={project.image}
@@ -143,9 +198,9 @@ export default function AIAgentic() {
             <div className="cursor-editor__agent">
               <div className="agent-header">
                 <div className="agent-title">
-                  <span className="sparkle-icon">✨</span> Cursor Agent
+                  <span className="sparkle-icon">🎮</span> Unity Engine Pipeline
                 </div>
-                <div className="agent-mode">AGENT MODE</div>
+                <div className="agent-mode">BUILD MODE</div>
               </div>
               <div className="agent-content">
                 <div className="agent-message">
@@ -165,7 +220,7 @@ export default function AIAgentic() {
                   </div>
                 </div>
                 <div className="agent-input-view">
-                  <span>Orchestrating multi-platform AI ecosystems...</span>
+                  <span>Connected to Google Play Dev ID: 4676958373919906847</span>
                 </div>
               </div>
             </div>

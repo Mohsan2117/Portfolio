@@ -8,7 +8,14 @@ export default function Projects() {
           <h2 className="section-title">Projects</h2>
           <div className="projects-grid">
             {projects.map((project) => (
-              <div className="project-card" key={project.title}>
+              <a
+                className="project-card"
+                key={project.title}
+                href={"href" in project ? project.href : undefined}
+                target="_blank"
+                rel="noreferrer"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
                 <div className="project-card__header">
                   <h3 className="project-card__title">{project.title}</h3>
                   <span className={`project-card__badge ${project.badgeClass}`}>{project.badge}</span>
@@ -19,7 +26,7 @@ export default function Projects() {
                     <li key={t}>{t}</li>
                   ))}
                 </ul>
-              </div>
+              </a>
             ))}
           </div>
         </div>
