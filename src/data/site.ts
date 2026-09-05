@@ -50,11 +50,10 @@ export const site = {
   playStoreDevUrl: "https://play.google.com/store/apps/dev?id=4676958373919906847",
   heroImage: "/2.png",
   stats: [
-    { number: "1+", label: "Years Experience" },
     { number: "4+", label: "Projects" },
     { number: "1", label: "Company" },
   ],
-  badge: "1+ Years Experience",
+  badge: "Full-Stack Developer",
   heroCtas: [
     { label: "View Resume", href: "https://resume-phi-ten-72.vercel.app/", variant: "hero", external: true },
     { label: "Get In Touch", href: "#contact", variant: "secondary" },
